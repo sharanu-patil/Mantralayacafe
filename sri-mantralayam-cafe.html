@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sri Mantralayam Cafe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --saffron:    #E8690A;
+      --turmeric:   #F5A623;
+      --jaggery:    #3B1F0A;
+      --cream:      #FDF6EC;
+      --leaf:       #2E5E2A;
+      --sand:       #F0E0C8;
+      --ash:        #6B5744;
+      --white:      #FFFDF9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--jaggery);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(253,246,236,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(232,105,10,0.15);
+    }
+    .nav-brand {
+      font-family: 'Yatra One', cursive;
+      font-size: 1.4rem;
+      color: var(--saffron);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ash);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--saffron); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--jaggery);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 100px 24px 60px;
+    }
+
+    /* Kolam / mandala decorative rings */
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(245,166,35,0.18);
+      pointer-events: none;
+    }
+    .hero-ring:nth-child(1) { width: 520px; height: 520px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .hero-ring:nth-child(2) { width: 750px; height: 750px; top: 50%; left: 50%; transform: translate(-50%,-50%); border-color: rgba(245,166,35,0.10); }
+    .hero-ring:nth-child(3) { width: 980px; height: 980px; top: 50%; left: 50%; transform: translate(-50%,-50%); border-color: rgba(245,166,35,0.06); }
+
+    /* Lotus petals top */
+    .hero-lotus {
+      font-size: 2.2rem;
+      letter-spacing: 0.4em;
+      color: var(--turmeric);
+      opacity: 0.7;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--turmeric);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Yatra One', cursive;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+    .hero h1 span { color: var(--turmeric); }
+    .hero-sub {
+      font-family: 'Noto Serif', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(240,224,200,0.75);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      padding: 13px 30px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.22s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--saffron);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: #CF5C08; }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(240,224,200,0.45);
+      color: var(--cream);
+    }
+    .btn-outline:hover {
+      border-color: var(--turmeric);
+      color: var(--turmeric);
+    }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--saffron);
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px;
+      padding: 16px 24px;
+      flex-wrap: wrap;
+    }
+    .strip-item {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--white);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .strip-item .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 96px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.73rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Yatra One', cursive;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      color: var(--jaggery);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .section-body {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.05rem;
+      color: var(--ash);
+      line-height: 1.75;
+      max-width: 640px;
+    }
+
+    /* ── STORY ── */
+    .story { background: var(--white); }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .story-visual {
+      position: relative;
+    }
+    .story-plate {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--sand);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* Decorative thali SVG placeholder */
+    .thali-art {
+      width: 220px; height: 220px;
+      position: relative;
+    }
+    .thali-art .plate {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #e8c8a0, #c49a60);
+      border: 8px solid #b8864a;
+      position: absolute;
+      top: 0; left: 0;
+      box-shadow: 0 8px 40px rgba(59,31,10,0.25);
+    }
+    .thali-art .bowl {
+      position: absolute;
+      border-radius: 50%;
+      border: 3px solid rgba(59,31,10,0.15);
+    }
+    .bowl-1 { width: 54px; height: 54px; top: 28px; left: 82px; background: #E04520; }
+    .bowl-2 { width: 46px; height: 46px; top: 78px; left: 148px; background: #8B5E2B; }
+    .bowl-3 { width: 46px; height: 46px; top: 78px; left: 26px; background: #4A7C3F; }
+    .bowl-4 { width: 50px; height: 50px; top: 138px; left: 60px; background: #D4A843; }
+    .bowl-5 { width: 50px; height: 50px; top: 138px; left: 112px; background: #C9602A; }
+    .bowl-center { width: 60px; height: 60px; top: 80px; left: 80px; background: #F0D080; border: 4px solid #b8864a; }
+    .story-accent-box {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 140px; height: 140px;
+      border: 2px solid var(--turmeric);
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    /* ── MENU ── */
+    .menu { background: var(--cream); }
+    .menu-tabs {
+      display: flex; gap: 0;
+      margin-bottom: 48px;
+      border-bottom: 2px solid var(--sand);
+    }
+    .tab {
+      padding: 12px 28px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--ash);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+      background: none;
+      border-top: none; border-left: none; border-right: none;
+    }
+    .tab.active {
+      color: var(--saffron);
+      border-bottom-color: var(--saffron);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 28px;
+      border: 1px solid var(--sand);
+      position: relative;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .menu-card:hover {
+      box-shadow: 0 8px 32px rgba(59,31,10,0.1);
+      transform: translateY(-3px);
+    }
+    .menu-card-emoji {
+      font-size: 2rem; margin-bottom: 14px; display: block;
+    }
+    .menu-card h3 {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--jaggery);
+    }
+    .menu-card p {
+      font-size: 0.88rem;
+      color: var(--ash);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .menu-card-price {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--saffron);
+    }
+    .bestseller-tag {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--leaf);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 2px;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── SPECIALS BANNER ── */
+    .specials {
+      background: var(--jaggery);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .specials .section-label { color: var(--turmeric); }
+    .specials .section-heading { color: var(--cream); margin: 0 auto 16px; }
+    .specials-body {
+      font-family: 'Noto Serif', serif;
+      font-style: italic;
+      color: rgba(240,224,200,0.7);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .specials-cards {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      justify-content: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .special-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(245,166,35,0.2);
+      border-radius: 4px;
+      padding: 30px 28px;
+      flex: 1; min-width: 220px; max-width: 260px;
+      text-align: left;
+    }
+    .special-card .day {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--turmeric);
+      margin-bottom: 10px;
+    }
+    .special-card h3 {
+      font-family: 'Yatra One', cursive;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .special-card p {
+      font-size: 0.85rem;
+      color: rgba(240,224,200,0.6);
+      line-height: 1.6;
+    }
+
+    /* ── VALUES ── */
+    .values { background: var(--white); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 32px;
+      margin-top: 56px;
+    }
+    .value-item {
+      text-align: center;
+      padding: 32px 20px;
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+    }
+    .value-icon {
+      font-size: 2.4rem; margin-bottom: 16px;
+      display: block;
+    }
+    .value-item h3 {
+      font-family: 'Noto Serif', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--jaggery);
+    }
+    .value-item p {
+      font-size: 0.85rem;
+      color: var(--ash);
+      line-height: 1.65;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--sand); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      padding: 28px;
+      border-radius: 4px;
+      border-left: 3px solid var(--saffron);
+    }
+    .stars { color: var(--turmeric); font-size: 0.85rem; margin-bottom: 12px; }
+    .testimonial-card blockquote {
+      font-family: 'Noto Serif', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ash);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .testimonial-author {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--jaggery);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── VISIT ── */
+    .visit { background: var(--cream); }
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .visit-info-block { margin-bottom: 32px; }
+    .visit-info-block h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 10px;
+    }
+    .visit-info-block p {
+      font-family: 'Noto Serif', serif;
+      color: var(--ash);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+    .map-placeholder {
+      background: var(--sand);
+      border-radius: 4px;
+      height: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      border: 1px solid rgba(59,31,10,0.1);
+      font-family: 'Noto Serif', serif;
+      font-style: italic;
+      color: var(--ash);
+      font-size: 0.95rem;
+    }
+    .map-placeholder .map-icon { font-size: 2.5rem; }
+    .map-placeholder a {
+      color: var(--saffron);
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--saffron);
+      padding-bottom: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--jaggery);
+      padding: 56px 24px 36px;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Yatra One', cursive;
+      font-size: 2rem;
+      color: var(--turmeric);
+      margin-bottom: 8px;
+    }
+    .footer-tagline {
+      font-family: 'Noto Serif', serif;
+      font-style: italic;
+      color: rgba(240,224,200,0.5);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+    .footer-divider {
+      width: 48px; height: 1px;
+      background: var(--turmeric);
+      margin: 0 auto 32px;
+    }
+    .footer-links {
+      display: flex; gap: 28px; justify-content: center;
+      flex-wrap: wrap; list-style: none;
+      margin-bottom: 36px;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(240,224,200,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--turmeric); }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(240,224,200,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .story-grid, .visit-grid { grid-template-columns: 1fr; gap: 40px; }
+      .story-accent-box { display: none; }
+      section { padding: 64px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Sri Mantralayam</div>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Daily Specials</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div style="position:relative; z-index:2;">
+    <span class="hero-lotus">🪷 🪷 🪷</span>
+    <p class="hero-eyebrow">Pure Vegetarian · Bangalore</p>
+    <h1>Sri Mantralayam<br/><span>Cafe</span></h1>
+    <p class="hero-sub">Temple-town flavours, lovingly brought to your table. Every dish made fresh, every meal a blessing.</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn btn-primary">Explore Menu</a>
+      <a href="#visit" class="btn btn-outline">Find Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">🌿 100% Vegetarian</div>
+  <div class="strip-item"><span class="dot"></span></div>
+  <div class="strip-item">🥣 Home-style Cooking</div>
+  <div class="strip-item"><span class="dot"></span></div>
+  <div class="strip-item">🍃 No Onion · No Garlic</div>
+  <div class="strip-item"><span class="dot"></span></div>
+  <div class="strip-item">☕ Open 6:30 AM – 9:30 PM</div>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="section-inner story-grid">
+    <div>
+      <p class="section-label">Our Story</p>
+      <h2 class="section-heading">Food cooked with devotion, served with warmth</h2>
+      <p class="section-body">
+        Named in honour of the sacred town of Mantralayam — abode of Sri Raghavendra Swamy — our cafe carries forward a tradition of sattvic cooking that feeds the soul as much as the body. No onion, no garlic, just pure, carefully spiced South Indian food made the old way.
+      </p>
+      <br/>
+      <p class="section-body">
+        From piping-hot idlis at sunrise to crispy dosas for lunch and warm rasam rice in the evenings, every item on our menu is a nod to the kitchens of Karnataka and Andhra. Walk in hungry. Leave at peace.
+      </p>
+      <br/>
+      <a href="#menu" class="btn btn-primary" style="display:inline-block; margin-top:8px;">See What's Cooking</a>
+    </div>
+    <div class="story-visual">
+      <div class="story-plate">
+        <div class="thali-art">
+          <div class="plate"></div>
+          <div class="bowl bowl-1"></div>
+          <div class="bowl bowl-2"></div>
+          <div class="bowl bowl-3"></div>
+          <div class="bowl bowl-4"></div>
+          <div class="bowl bowl-5"></div>
+          <div class="bowl bowl-center"></div>
+        </div>
+      </div>
+      <div class="story-accent-box"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="section-inner">
+    <p class="section-label">Our Menu</p>
+    <h2 class="section-heading">Made fresh, every morning</h2>
+
+    <div class="menu-tabs">
+      <button class="tab active" onclick="switchTab('breakfast', this)">Breakfast</button>
+      <button class="tab" onclick="switchTab('lunch', this)">Lunch</button>
+      <button class="tab" onclick="switchTab('tiffin', this)">Evening Tiffin</button>
+      <button class="tab" onclick="switchTab('beverages', this)">Beverages</button>
+    </div>
+
+    <!-- Breakfast -->
+    <div class="tab-panel active" id="tab-breakfast">
+      <div class="menu-grid">
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥞</span>
+          <h3>Idli Sambar</h3>
+          <p>Soft, steamed idlis with aromatic dal sambar and coconut chutney.</p>
+          <span class="menu-card-price">₹40</span>
+          <div class="bestseller-tag">Best Seller</div>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🫓</span>
+          <h3>Masala Dosa</h3>
+          <p>Crispy golden dosa with spiced potato filling, sambar and three chutneys.</p>
+          <span class="menu-card-price">₹60</span>
+          <div class="bestseller-tag">Best Seller</div>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🍱</span>
+          <h3>Ven Pongal</h3>
+          <p>Creamy rice and moong dal simmered with ghee, pepper, cumin and cashews.</p>
+          <span class="menu-card-price">₹55</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥣</span>
+          <h3>Upma</h3>
+          <p>Semolina cooked with vegetables, tempered mustard seeds and curry leaves.</p>
+          <span class="menu-card-price">₹40</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🫔</span>
+          <h3>Uttapam</h3>
+          <p>Thick, spongy pancake topped with tomatoes, onion and green chillies.</p>
+          <span class="menu-card-price">₹55</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥐</span>
+          <h3>Set Dosa</h3>
+          <p>Three soft, pillowy dosas served with sagu and coconut chutney.</p>
+          <span class="menu-card-price">₹55</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lunch -->
+    <div class="tab-panel" id="tab-lunch">
+      <div class="menu-grid">
+        <div class="menu-card">
+          <span class="menu-card-emoji">🍽️</span>
+          <h3>Thali Meals</h3>
+          <p>Rice, rasam, sambar, two sabzis, papad, pickle and buttermilk. Unlimited.</p>
+          <span class="menu-card-price">₹120</span>
+          <div class="bestseller-tag">Must Try</div>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🍛</span>
+          <h3>Bisibele Bath</h3>
+          <p>Karnataka's beloved one-pot of rice, lentils and vegetables slow-cooked in a spice masala.</p>
+          <span class="menu-card-price">₹80</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥘</span>
+          <h3>Sambar Rice</h3>
+          <p>Hot rice mixed with tangy vegetable sambar and a drizzle of ghee.</p>
+          <span class="menu-card-price">₹70</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥗</span>
+          <h3>Curd Rice</h3>
+          <p>Cooling curd rice tempered with mustard, curry leaves and pomegranate seeds.</p>
+          <span class="menu-card-price">₹60</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evening Tiffin -->
+    <div class="tab-panel" id="tab-tiffin">
+      <div class="menu-grid">
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥞</span>
+          <h3>Mini Idli (12 pcs)</h3>
+          <p>Bite-sized idlis tossed in spicy podi with ghee or dipped in sambar.</p>
+          <span class="menu-card-price">₹50</span>
+          <div class="bestseller-tag">Best Seller</div>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🫓</span>
+          <h3>Ghee Dosa</h3>
+          <p>Paper-thin dosa generously finished with pure desi ghee.</p>
+          <span class="menu-card-price">₹65</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🫙</span>
+          <h3>Poha</h3>
+          <p>Flattened rice with turmeric, green chillies, fresh coriander and lemon.</p>
+          <span class="menu-card-price">₹40</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥜</span>
+          <h3>Rava Idli</h3>
+          <p>Semolina idli with a crunchy cashew top, fresh chutney on the side.</p>
+          <span class="menu-card-price">₹50</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Beverages -->
+    <div class="tab-panel" id="tab-beverages">
+      <div class="menu-grid">
+        <div class="menu-card">
+          <span class="menu-card-emoji">☕</span>
+          <h3>Filter Coffee</h3>
+          <p>South Indian decoction, boiled milk, jaggery optional. Served in a traditional dabarah set.</p>
+          <span class="menu-card-price">₹25</span>
+          <div class="bestseller-tag">Must Try</div>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🍵</span>
+          <h3>Ginger Tea</h3>
+          <p>Strong, aromatic tea with fresh ginger and lemongrass.</p>
+          <span class="menu-card-price">₹20</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🥛</span>
+          <h3>Buttermilk (Majjige)</h3>
+          <p>Salted yoghurt drink with cumin, curry leaves and coriander.</p>
+          <span class="menu-card-price">₹20</span>
+        </div>
+        <div class="menu-card">
+          <span class="menu-card-emoji">🍹</span>
+          <h3>Nannari Sharbat</h3>
+          <p>Traditional Indian sarsaparilla syrup in chilled water with lemon.</p>
+          <span class="menu-card-price">₹35</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section class="specials" id="specials">
+  <p class="section-label">Daily Specials</p>
+  <h2 class="section-heading">Something different, every day</h2>
+  <p class="specials-body">Like grandmother's kitchen — the menu changes with the day and the season.</p>
+  <div class="specials-cards">
+    <div class="special-card">
+      <div class="day">Monday & Thursday</div>
+      <h3>Kashi Halwa</h3>
+      <p>Ash gourd slow-cooked in ghee and sugar until it glows amber.</p>
+    </div>
+    <div class="special-card">
+      <div class="day">Tuesday & Friday</div>
+      <h3>Banana Leaf Meals</h3>
+      <p>Full thali served on a fresh banana leaf — the traditional way.</p>
+    </div>
+    <div class="special-card">
+      <div class="day">Wednesday</div>
+      <h3>Pesarattu</h3>
+      <p>Andhra-style green moong dosa with ginger chutney and upma stuffing.</p>
+    </div>
+    <div class="special-card">
+      <div class="day">Saturday & Sunday</div>
+      <h3>Ghee Pongal + Vadai</h3>
+      <p>Indulgent weekend combo — rich pongal with crispy medu vada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="section-inner">
+    <p class="section-label">Why We're Different</p>
+    <h2 class="section-heading">Food rooted in faith and freshness</h2>
+    <div class="values-grid">
+      <div class="value-item">
+        <span class="value-icon">🌿</span>
+        <h3>Sattvic Kitchen</h3>
+        <p>No onion, no garlic — our recipes follow the tradition of temple prasadam kitchens.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🫙</span>
+        <h3>Made Fresh Daily</h3>
+        <p>Batters ground overnight. Vegetables sourced each morning. Nothing reheated.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🫒</span>
+        <h3>Pure Ingredients</h3>
+        <p>Cold-pressed groundnut oil, A2 desi ghee, and hand-picked spices ground in-house.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">💛</span>
+        <h3>Affordable for All</h3>
+        <p>We believe good sattvic food should be within everyone's reach. Always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <p class="section-label">Guest Voices</p>
+    <h2 class="section-heading">What people are saying</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The filter coffee alone is worth the trip. Tastes exactly like what my grandmother used to make in her kitchen in Mysuru."</blockquote>
+        <div class="testimonial-author">— Suresh R., Regular Customer</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Finally a no-onion-no-garlic place that doesn't compromise on taste. The Saturday ghee pongal is divine."</blockquote>
+        <div class="testimonial-author">— Lakshmi V., Bangalore</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★☆</div>
+        <blockquote>"Banana leaf meals on Fridays are an experience. Generous portions, warm service, and prices that feel from another era."</blockquote>
+        <div class="testimonial-author">— Anand M., Peenya</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="section-inner visit-grid">
+    <div>
+      <p class="section-label">Visit Us</p>
+      <h2 class="section-heading">Come as a guest,<br/>leave as family</h2>
+      <div class="visit-info-block">
+        <h3>Address</h3>
+        <p>Sri Mantralayam Cafe<br/>Peenya, Bangalore<br/>Karnataka, India</p>
+      </div>
+      <div class="visit-info-block">
+        <h3>Hours</h3>
+        <p>
+          Mon – Sat: 6:30 AM – 9:30 PM<br/>
+          Sunday: 7:00 AM – 9:00 PM<br/>
+          <em style="font-size:0.85rem; opacity:0.7;">Kitchen closes 30 min before closing</em>
+        </p>
+      </div>
+      <div class="visit-info-block">
+        <h3>Contact</h3>
+        <p>+91 98XXX XXXXX<br/>Takeaway available · Dine-in only (no delivery)</p>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <span class="map-icon">📍</span>
+      <p>Sri Mantralayam Cafe, Peenya, Bangalore</p>
+      <a href="https://share.google/n7xJ8LkAhuL5n1npY" target="_blank">Open in Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Sri Mantralayam Cafe</div>
+  <p class="footer-tagline">Nourishing body, mind and soul since day one.</p>
+  <div class="footer-divider"></div>
+  <ul class="footer-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Sri Mantralayam Cafe · Pure Vegetarian · Bangalore</p>
+</footer>
+
+<script>
+  function switchTab(id, el) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    el.classList.add('active');
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.menu-card, .value-item, .testimonial-card, .special-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
